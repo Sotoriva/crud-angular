@@ -1,0 +1,68 @@
+<div class="container mt-3">
+  <div class="input-group mb-3">
+    <input
+      [(ngModel)]="searchValue"
+      type="text"
+      class="form-control"
+      placeholder="Pesquisar"
+    />
+    <button
+      (click)="carregarPessoas(1)"
+      type="button"
+      class="btn btn-secondary"
+    >
+      <i class="bi bi-search"></i>
+    </button>
+  </div>
+  <hr />
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Idade</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pessoa of pessoas; let index = index">
+        <th scope="row">{{ index + 1 }}</th>
+        <td>{{ pessoa.nome }}</td>
+        <td>{{ pessoa.idade }}</td>
+        <td>
+          <button
+            routerLink="/pessoa/{{ pessoa.id }}"
+            class="border-0 bg-transparent"
+          >
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button (click)="remover(pessoa.id)" class="border-0 bg-transparent">
+            <i class="bi bi-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="row">
+    <div class="col-2">
+      <button
+        type="button"
+        class="btn btn-primary mt-2"
+        routerLink="/pessoa/novo"
+      >
+        Novo
+      </button>
+    </div>
+    <div class="col mt-2">
+      <ngb-pagination
+        (pageChange)="carregarPessoas($event)"
+        [ellipses]="false"
+        [collectionSize]="totalElements"
+        [pageSize]="totalPage"
+        [maxSize]="5"
+        aria-label="Default pagination"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

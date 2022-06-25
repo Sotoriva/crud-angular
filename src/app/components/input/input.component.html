@@ -1,0 +1,16 @@
+<label [class.required]="isRequired()" for="{{ label }}" class="form-label">{{
+  label
+}}</label>
+<input
+  [mask]="mask"
+  [id]="label"
+  [formControl]="formControl"
+  [class.is-valid]="formControl.dirty && formControl.valid"
+  [class.is-invalid]="formControl.dirty && formControl.invalid"
+  [type]="type"
+  class="form-control"
+  [placeholder]="placeholder"
+/>
+<div class="invalid-feedback">
+  {{ getErrorMessage() }}
+</div>

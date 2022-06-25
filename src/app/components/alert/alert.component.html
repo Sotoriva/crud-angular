@@ -1,0 +1,13 @@
+<div
+  [class.alert-dismissible]="closeable"
+  class="alert alert-{{ color }}"
+  role="alert"
+>
+  <ng-content></ng-content>
+  <button
+    (click)="onClose.emit()"
+    *ngIf="closeable"
+    type="button"
+    class="btn-close"
+  ></button>
+</div>

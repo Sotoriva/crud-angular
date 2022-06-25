@@ -1,0 +1,17 @@
+<button
+  [disabled]="disabled"
+  type="button"
+  [class.position-relative]="badgeCorner"
+  class="btn {{ getButtonClassColor() }} {{ getButtonSizeClass() }}"
+>
+  <ng-content></ng-content>
+  <span
+    *ngIf="badge"
+    [ngClass]="{
+      'position-absolute top-0 start-100 translate-middle rounded-pill':
+        badgeCorner
+    }"
+    class="badge mx-1 bg-{{ badgeColor }}"
+    >{{ badge }}</span
+  >
+</button>

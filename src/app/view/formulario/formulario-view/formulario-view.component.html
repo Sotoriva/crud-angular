@@ -1,0 +1,45 @@
+<div *ngIf="formulario" class="container mt-3" [formGroup]="formularioGroup">
+  <h1>{{ formulario.titulo }}</h1>
+  <h6>{{ formulario.descricao }}</h6>
+
+  <hr />
+
+  <div *ngFor="let questao of formulario.questoes" class="mt-3">
+    <div [ngSwitch]="questao.tipo">
+      <app-input
+        *ngSwitchCase="'text'"
+        [label]="questao.titulo"
+        type="text"
+        [controlName]="questao.titulo"
+      ></app-input>
+
+      <div class="form-check" *ngSwitchCase="'checkbox'">
+        <input
+          [formControlName]="questao.titulo"
+          class="form-check-input"
+          type="checkbox"
+        />
+        <label class="form-check-label">
+          {{ questao.titulo }}
+        </label>
+      </div>
+
+      <div *ngSwitchCase="'option'">
+        <label class="form-label required">{{ questao.titulo }}</label>
+        <select class="form-select" [formControlName]="questao.titulo">
+          <option *ngFor="let opcao of questao.opcoes" [value]="opcao.valor">
+            {{ opcao.valor }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <button
+    (click)="salvarResposta()"
+    [disabled]="formularioGroup.invalid"
+    type="button"
+    class="btn btn-dark mt-3"
+  >
+    Responder
+  </button>
+</div>
